@@ -4,29 +4,30 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <DxButton
+        text="Click me"
+        @click="sayHelloWorld"
+    />
+    <router-view />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
+<script>
+import DxButton from 'devextreme-vue/button';
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+    components: {
+        DxButton
+    },
+    methods: {
+        sayHelloWorld() {
+            alert('Hello world!')
+        }
     }
-  }
 }
+</script>
+
+<style lang="scss">
+@import "./assets/scss/main.scss";
 </style>
