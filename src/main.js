@@ -5,7 +5,7 @@ import store from './store'
 
 import './assets/styles/main.scss';
 
-// import 'flexboxgrid-sass/flexboxgrid.scss';
+import 'flexboxgrid/css/flexboxgrid.min.css';
 
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';

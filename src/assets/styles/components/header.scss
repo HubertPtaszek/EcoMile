@@ -1,17 +1,32 @@
-.inner {
-  width: 100%;
-  max-width: 68em;
-  margin: 0 auto;
-  padding: 0 2.5em;
+#header {
+  padding-top: 15px;
 }
 
-.logo {
+#header .logo {
+  display: block;
   border-bottom: 0;
   color: inherit;
   font-weight: 900;
   letter-spacing: 0.35em;
-  margin: 0 0 2.5em 0;
+  margin: 0 0 1.5em 0;
   text-decoration: none;
   text-transform: uppercase;
   display: inline-block;
+}
+
+#header .logo > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#header .burger-button {
+  position: fixed;
+  left: 1em;
+  top: 2em;
+  z-index: 10000;
+}
+
+#header .logo-icon {
+  font-size: 32px;
+  margin-right: 0.5em;
 }
