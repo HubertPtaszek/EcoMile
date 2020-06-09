@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import { mutations } from '../store'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  mutations.hide(); 
+  next();
 })
 
 export default router

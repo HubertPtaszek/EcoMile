@@ -13,13 +13,17 @@
 </template>
 
 <script>
+    import { store, mutations } from '@/store.js'
+    
     export default {
-        data: () => ({
-            isBurgerActive: false
-        }),
+        computed: {
+            isBurgerActive() {
+                return store.isNavOpen
+            }
+        },
         methods: {
             toggle() {
-                this.isBurgerActive = !this.isBurgerActive
+                mutations.toggleNav()
             }
         }
     }

@@ -9,6 +9,10 @@
   transition: all 150ms ease-in 0s;
 }
 
+.sidebar-title{
+  margin-bottom: 1em;
+}
+
 .sidebar-backdrop {
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
@@ -27,8 +31,10 @@
   top: 0;
   height: 100vh;
   z-index: 999;
-  padding: 3rem 20px 2rem 20px;
-  width: 300px;
+  padding: 2rem 20px 2rem 20px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-panel-nav {
@@ -41,6 +47,7 @@
   font-size: 1.5rem;
   display: block;
   padding-bottom: 0.5em;
+  padding-top: 0.5em;
 }
 
 ol {
@@ -56,11 +63,6 @@ ol li {
 ul {
   list-style: disc;
   margin: 0 0 2em 0;
-  padding-left: 1em;
-}
-
-ul li {
-  padding-left: 0.5em;
 }
 
 ul.alt {
@@ -279,7 +281,7 @@ ul.actions.fit.stacked {
 }
 
 .menu > .inner > ul > li .active {
-  color: #f2849e;
+  color: #42b983;
 }
 
 .menu > .inner > ul > li:first-child {
