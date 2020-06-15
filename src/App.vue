@@ -20,8 +20,40 @@ import "devextreme/localization/globalize/date";
 import "devextreme/localization/globalize/currency";
 import "devextreme/localization/globalize/message";
 
+//import "workflow-client/src/assets/styles/engine/engine.scss";
+import plMessages from "./assets/pl.json";
+import plCldrData from "devextreme-cldr-data/pl.json";
+import supplementalCldrData from "devextreme-cldr-data/supplemental.json";
+import config from "devextreme/core/config";
+import Globalize from "globalize";
+config({
+  forceIsoDateParsing: true
+});
 export default {
   name: "App",
+  methods:{
+    getLocale() {
+      const locale = sessionStorage.getItem("locale");
+      return locale != null ? locale : "pl";
+    },
+    setLocale(locale) {
+      sessionStorage.setItem("locale", locale);
+    },
+    initGlobalize() {
+      Globalize.load(plCldrData, supplementalCldrData);
+      Globalize.loadMessages(plMessages);
+      Globalize.locale(this.locale);
+    },
+    changeLocale(e) {
+      this.setLocale(e.value);
+      document.location.reload();
+    },
+    formatMessage: Globalize.formatMessage.bind(Globalize),
+  },
+  created(){
+    this.locale = this.getLocale();
+    this.initGlobalize();
+  },
   components: {
     Sidebar,
   },
