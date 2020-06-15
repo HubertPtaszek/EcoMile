@@ -9,7 +9,7 @@
 import Header from "@/components/Header.vue";
 
 export default {
-  name: "Home",
+  name: "About",
   components: {
     Header
   },

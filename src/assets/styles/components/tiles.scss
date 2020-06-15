@@ -7,7 +7,7 @@
 	-webkit-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
-	postiion: relative;
+	position: relative;
 	margin: -2.5em 0 0 -2.5em;
 }
 
@@ -168,14 +168,6 @@
 		margin-top: 2em;
 	}
 
-	body.is-preload .tiles article {
-		-moz-transform: scale(0.9);
-		-webkit-transform: scale(0.9);
-		-ms-transform: scale(0.9);
-		transform: scale(0.9);
-		opacity: 0;
-	}
-
 	body.is-touch .tiles article .content {
 		max-height: 15em;
 		opacity: 1;
@@ -224,18 +216,5 @@
 					-ms-transform: scale(1.0);
 					transform: scale(1.0);
 				}
-
-	}
-
-	@media screen and (max-width: 480px) {
-
-		.tiles {
-			margin: 0;
-		}
-
-			.tiles article {
-				width: 100%;
-				margin: 1.25em 0 0 0;
-			}
 
 	}
