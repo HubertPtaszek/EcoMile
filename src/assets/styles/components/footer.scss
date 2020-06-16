@@ -145,8 +145,17 @@ ul.icons li {
   margin-left: -2em;
 }
 
+#form .dx-widget {
+  font-size: 20px;
+}
 
+#form .dx-texteditor.dx-editor-outlined {
+  background: none;
+}
 
+#form .dx-texteditor.dx-state-hover {
+  border-color: #42b983;
+}
 
 #formBtn {
   -moz-appearance: none;
@@ -191,4 +200,11 @@ ul.icons li {
 
 .actions {
   margin-bottom: 55px;
+}
+
+.popup-content {
+  font-size: 20px;
+  span {
+    font-weight: 900;
+  }
 }

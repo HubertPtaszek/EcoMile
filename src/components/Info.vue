@@ -16,7 +16,7 @@
       <h2>Znajdziesz nas na:</h2>
       <ul class="icons">
         <li>
-          <a href="#" class="icon style2 fab fa-twitter"
+          <a href="https://twitter.com/" class="icon style2 fab fa-twitter"
             ><span class="label">Twitter</span></a
           >
         </li>
@@ -28,17 +28,17 @@
           >
         </li>
         <li>
-          <a href="#" class="icon style2 fab fa-instagram"
+          <a href="https://www.instagram.com/" class="icon style2 fab fa-instagram"
             ><span class="label">Instagram</span></a
           >
         </li>
         <li>
-          <a href="#" class="icon style2 fab fa-linkedin"
+          <a href="https://www.linkedin.com/" class="icon style2 fab fa-linkedin"
             ><span class="label">LinkedIn</span></a
           >
         </li>
         <li>
-          <a href="#" class="icon style2 fab fa-pinterest"
+          <a href="https://pl.pinterest.com/" class="icon style2 fab fa-pinterest"
             ><span class="label">Pinterest</span></a
           >
         </li>
