@@ -1,9 +1,9 @@
 <template>
-  <article id="tiles" :class="'style' + tilesId">
+  <article id="tiles" :class="'style' + tilesId" @click="setCar(tilesId)">
     <span class="image">
       <img :src="require(`../assets/images/${tilesId}.jpg`)" />
     </span>
-    <a href="#footer" class="scrolly">
+    <a href="#" v-scroll-to="{ element: '#copyright', duration: 1000 }"  class="scrolly">
       <h2>{{ title }}</h2>
       <p>
         Cena od:<strong> {{ price }} zł/dzień</strong>
@@ -22,5 +22,10 @@
 export default {
   name: "Tiles",
   props: ["tilesId", "title", "price"],
+  methods: {
+    setCar(e) {
+      this.$emit("carData", e)
+    },
+  },
 };
 </script>

@@ -55,3 +55,6 @@ Vue.component('DxSearchPanel', DxSearchPanel)
 Vue.component('DxFilterRow', DxFilterRow)
 Vue.component('DxSorting', DxSorting)
 Vue.component('DxRemoteOperations', DxRemoteOperations)
+
+var VueScrollTo = require('vue-scrollto');
+Vue.use(VueScrollTo)

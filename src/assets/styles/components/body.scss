@@ -1,7 +1,53 @@
-.subtitle{
-	margin-bottom: 20px;
+.subtitle {
+  margin-bottom: 20px;
 }
 
-.dx-list-group-header{
-	color: #42b983 !important;
+.dx-list-group-header {
+  color: #42b983 !important;
+}
+
+#contact > .inner {
+  text-align: left;
+  height: 713px;
+}
+
+#about > .inner {
+  text-align: left;
+  height: 713px;
+}
+
+#contact > .inner > * > a {
+  border: none;
+}
+
+#contact > * > h3 {
+  margin-bottom: 1em;
+  margin-top: 2em;
+}
+
+#about > * > h3 {
+  margin-bottom: 1em;
+  margin-top: 2em;
+}
+
+#contact > * > h6 {
+  margin-bottom: 1em;
+  margin-top: 2em;
+}
+
+#contact > * > p {
+  margin-bottom: 0;
+  margin-top: 1em;
+}
+
+#contact > #footer {
+  padding-top: 5px;
+}
+
+#about > #footer {
+  padding-top: 5px;
+}
+
+#app > .row {
+  text-align: left;
 }
