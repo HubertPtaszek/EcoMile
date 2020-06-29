@@ -193,7 +193,7 @@ ul.icons li {
   white-space: nowrap;
 }
 
-#formBtn:hover {
+#formBtn:hover, #cancelBtn:hover, #sendBtn:hover {
   background-color: #42b983;
   border-color: #42b983 !important;
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="form">
     <section class="form">
-      <form id="app" @submit.prevent="addOrder">
+      <form id="app" ref="form" @submit.prevent="addOrder">
         <h2>Wypełnij formularz rezerwacji</h2>
         <div class="row mb-1">
           <div class="col-12">
@@ -14,6 +14,7 @@
               display-expr="Name"
               value-expr="ID"
               placeholder="Wybierz..."
+              @value-changed="recountCost()"
             >
               <dx-validator>
                 <dx-required-rule message="Pole wymagane" />
@@ -60,7 +61,7 @@
           </div>
         </div>
         <div class="row mb-1">
-          <div class="col-12">
+          <div class="col-6">
             <label>Ilość dni wypożyczenia:</label>
             <DxNumberBox
               ref="time"
@@ -68,10 +69,23 @@
               :readOnly="true"
               :height="48"
               :min="1"
+              @value-changed="recountCost()"
             >
               <dx-validator>
                 <dx-required-rule message="Pole wymagane" />
               </dx-validator>
+            </DxNumberBox>
+          </div>
+          <div class="col-6">
+            <label>Koszt wypożyczenia:</label>
+            <DxNumberBox
+              ref="cost"
+              :value="0.0"
+              :readOnly="true"
+              :height="48"
+              :min="0"
+              format="##0.## PLN"
+            >
             </DxNumberBox>
           </div>
         </div>
@@ -123,17 +137,34 @@
     <DxPopup
       :visible.sync="popupVisible"
       :drag-enabled="false"
-      :close-on-outside-click="true"
+      :close-on-outside-click="false"
       :show-title="true"
       :width="800"
-      :height="150"
+      :showCloseButton="false"
+      height="auto"
       title="Rezerwacja"
     >
-      <p class="popup-content">
-        Dokonano rezerwacji pojazdu. Dalsze informacje przesłaliśmy na adres
-        e-mail
-        <span>{{ email }}</span>
-      </p>
+      <div class="row">
+        <div class="col-12">
+          <p class="popup-content">
+            Dokonano rezerwacji pojazdu o numerze <span>{{ id }}</span
+            >. Dalsze informacje przesłaliśmy na adres e-mail
+            <span>{{ email }}</span
+            >.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 order-popup-btn">
+          <dx-button
+            id="cancelBtn"
+            type="default"
+            text="Ok"
+            @click="hidePopup()"
+            v-scroll-to="{ element: '#app', duration: 1000 }"
+          ></dx-button>
+        </div>
+      </div>
     </DxPopup>
   </div>
 </template>
@@ -143,6 +174,7 @@ import DataSource from "devextreme/data/data_source";
 import { ungroupedCarData } from "@/store.js";
 import { DxValidator } from "devextreme-vue";
 import { DxRequiredRule } from "devextreme-vue/validator";
+import db from "@/global";
 
 export default {
   name: "Form",
@@ -184,11 +216,13 @@ export default {
         key: "ID",
         group: "Category",
       }),
+      ungroupedCarData: ungroupedCarData,
       now: new Date(),
       to: new Date().setDate(new Date().getDate() + 1),
       days: 1,
       popupVisible: false,
       email: "",
+      id: "",
     };
   },
   methods: {
@@ -199,7 +233,7 @@ export default {
         "min",
         dateFrom.getTime() + 1000 * 3600 * 24
       );
-      if (dateFrom.getTime() > dateTo.getTime())
+      if (dateFrom.getTime() >= dateTo.getTime())
         this.$refs.to.instance.option(
           "value",
           new Date().setDate(dateFrom.getDate() + 1)
@@ -210,6 +244,17 @@ export default {
         this.$refs.time.instance.option("value", Math.round(differenceInTime));
       }
     },
+    recountCost() {
+      var carId = this.$refs.carBox.instance.option("value");
+      var days = this.$refs.time.instance.option("value");
+      if (carId) {
+        var price = this.ungroupedCarData.find((e) => {
+          return e.ID == carId;
+        });
+        var finalCost = days * price.Cost;
+        this.$refs.cost.instance.option("value", finalCost);
+      }
+    },
     changeDateTo(e) {
       var dateTo = new Date(e.component.option("value"));
       var dateFrom = new Date(this.$refs.from.instance.option("value"));
@@ -217,7 +262,38 @@ export default {
         (dateTo.getTime() - dateFrom.getTime()) / (1000 * 3600 * 24);
       this.$refs.time.instance.option("value", Math.round(differenceInTime));
     },
+    hidePopup() {
+      this.popupVisible = false;
+      this.$refs.info.instance.reset();
+      this.$refs.phone.instance.reset();
+      this.$refs.mail.instance.reset();
+      this.$refs.name.instance.reset();
+
+      this.$refs.cost.instance.reset();
+      this.$refs.time.instance.option("value", this.days);
+
+      this.$refs.from.instance.option("value", new Date(this.now));
+      this.$refs.to.instance.option("value", new Date(this.to));
+
+      this.$refs.carBox.instance.reset();
+    },
     addOrder() {
+      const order = {
+        CarId: this.$refs.carBox.instance.option("value"),
+        From: new Date(this.$refs.from.instance.option("value")),
+        To: new Date(this.$refs.to.instance.option("value")),
+        Count: this.$refs.time.instance.option("value"),
+        Cost: this.$refs.cost.instance.option("value"),
+        Name: this.$refs.name.instance.option("value"),
+        Email: this.$refs.mail.instance.option("value"),
+        Phone: this.$refs.phone.instance.option("value"),
+        Description: this.$refs.info.instance.option("value"),
+      };
+      db.collection("orders")
+        .add(order)
+        .then((documentReference) => {
+          this.id = documentReference.id;
+        });
       this.email = this.$refs.mail.instance.option("value");
       this.popupVisible = true;
     },

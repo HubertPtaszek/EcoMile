@@ -10,10 +10,10 @@
       /></a></span>
       <h6>Skontatktuj się z nami</h6>
       <p>
-        Ul. Wymyślna 11 28-123 Kielce <br />
+        ul. Wymyślna 11 28-123 Kielce <br />
         Tel. +48 223 554 345
       </p>
-      <p>mail: mail@EcoMile.pl</p>
+      <p>mail: <a href="#">mail@EcoMile.pl</a></p>
     </div>
     <footer id="footer">
       <div class="inner">
